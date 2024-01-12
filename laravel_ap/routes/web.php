@@ -27,13 +27,16 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-
-// Rota para mostrar o formulário de login
+// Rota para formulário de login
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 
-// Rota para realizar o login
+// Rota para login
 Route::post('login', [LoginController::class, 'login']);
 
-// Rota para realizar o logout
+// Rota para logout
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::post('/messages', 'App\Http\Controllers\MessageController@store')->name('messages.store');
+Route::delete('/messages/{message}', 'App\Http\Controllers\MessageController@destroy')->name('messages.destroy');
+Route::post('/messages/{message}/move-up', 'App\Http\Controllers\MessageController@moveUp')->name('messages.move-up');
+Route::post('/messages/{message}/move-down', 'App\Http\Controllers\MessageController@moveDown')->name('messages.move-down');
